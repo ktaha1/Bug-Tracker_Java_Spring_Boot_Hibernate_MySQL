@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Role Assignement Page</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{cssjs/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{cssjs/css/sb-admin-2.css}" rel="stylesheet">
+
+   <!-- Custom styles for this page -->
+  <link th:href="@{cssjs/vendor/datatables/dataTables.bootstrap4.min.css}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/menu :: menu">&nbsp;</div>
+     <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <div th:replace="fragments/header :: header">&nbsp;</div>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h4 mb-4 text-gray-800">Role Assignement Management</h1>
+
+
+          <div class="row">
+
+            <div class="col-lg-4">
+
+
+              <!-- List of Users -->
+             <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Form of Assignement</h6>
+                </div>
+                <div class="card-body">
+                 <form  action="#" th:action="@{/dorole}"  method="post" >
+                  <div class="form-group">
+                      <label for="id2"> Select a User</label>
+                        <select class="form-control" id="id2" th:name="id" required>
+                          <option value="" disabled selected> ------- </option>
+                          <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName+' '+user.lastName}"></option>
+                        </select>
+
+                  </div>
+                  <div class="form-group">
+                      <label for="s2"> Choose the Role to assign </label>
+                        <select class="form-control" id="s2" name="newrole" required>
+                          <option value="" disabled selected> ------- </option>
+                          <option value="N/A">Reject Role</option>
+                          <option value="Admin">Admin</option>
+                          <option value="Manager">Manager</option>
+                          <option value="Developer">Developer</option>
+                          <option value="Tester">Tester</option>
+                        </select>
+                  </div>
+                  <input type="Submit" name="Submit" value="Assign" class="btn btn-primary btn-user btn-block">
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-lg-8">
+
+              <!-- List of Roles -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">List of Users with assigned Roles</h6>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Personnel</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Created</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Personnel</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Created</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                  <tr th:if="${users.empty}">
+                    <td colspan="4"> No User Available </td>
+                  </tr>
+                  <tr th:each="user : ${users}">
+                    <td><span th:text="${user.firstName+' '+user.lastName}">  </span></td>
+                    <td><span th:text="${user.email}">  </span></td>
+                    <td><span th:text="${user.role}">  </span></td>
+                    <td><span th:text="${user.dateCreation}">  </span></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+                </div>
+              </div>
+             
+            </div>
+
+          </div>
+
+
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <div th:replace="fragments/footer :: footer">&nbsp;</div>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <div th:replace="fragments/footer :: extrafooter"></div>
+
+</body>
+
+</html>

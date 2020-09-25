@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" th:fragment="menu">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+            <img th:src="@{/cssjs/img/logo3.png}" style="width: 65%">
+        </div>
+        <div class="sidebar-brand-text mx-3">Bug Tracker</div>
+        <!-- <img src="img/logo2.png"> -->
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+        <a class="nav-link" href="/dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Management
+    </div>
+
+    <!-- Nav Item - Role/User Assignement -->
+    <li class="nav-item">
+        <a class="nav-link" href="/role">
+            <i class="fas fa-fw fa-user-plus"></i>
+            <span>Role Assignement</span></a>
+    </li>
+
+    <!-- Nav Item - User/Project Assignement -->
+    <li class="nav-item">
+        <a class="nav-link" href="/projectassign">
+            <i class="fas fa-fw fa-user-cog"></i>
+            <span>Project Assignement</span></a>
+    </li>
+
+    <!-- Nav Item - Pages Collapse Menu - Projects -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Projects</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header"></h6> -->
+                <a class="collapse-item" href="/projects">List of projects</a>
+                <a class="collapse-item" href="/newproject">Create new project</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu - Bugs -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-bug"></i>
+            <span>Bugs</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <!-- <h6 class="collapse-header">Custom Utilities:</h6> -->
+                <a class="collapse-item" href="/bugs">List of bugs</a>
+                <a class="collapse-item" href="/newbug">Create new bug</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->
+</body>
+</html>

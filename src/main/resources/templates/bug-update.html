@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Update Bug</title>
+
+  <!-- Custom fonts for this template-->
+  <link th:href="@{/cssjs/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet" type="text/css">
+  <link th:href="@{https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i}" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link th:href="@{/cssjs/css/sb-admin-2.css}" rel="stylesheet">
+
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:replace="fragments/menu :: menu">&nbsp;</div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <div th:replace="fragments/header :: header">&nbsp;</div>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <!--<h1 class="h3 mb-4 text-gray-800">Bug Creation</h1> -->
+
+          <div class="row justify-content-center">
+            <div class="col-lg-9 col-md-9">
+              
+               <!-- List of Users -->
+             <div class="card shadow mb-4 ">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Edit Form</h6>
+                </div>
+                <div class="card-body">
+                  <form  action="#" th:action="@{/editbug}"  method="post">
+                  <div class="row">
+                      <div class="form-group col">
+                      <label for="title">Title</label>
+                      <input type="text" class="form-control" id="title" name="title" required th:value="${bug.title}">
+                        <input type="hidden" name="idbug" th:value="${bug.id}">
+                    </div>
+                    <div class="form-group col">
+                      <label for="pro">Project</label>
+                      <input type="text" class="form-control" id="pro" name="projecttitle" required disabled th:value="${bug.project.title}">
+                    </div>
+                  </div>
+                  <div class="row">
+                     <div class="form-group col">
+                    <label for="Priority">Priority</label>
+                    <select class="form-control" id="Priority" name="priority" required>
+                      <option th:selected="${bug.priority}=='Low' ? true :false">Low</option>
+                      <option th:selected="${bug.priority}=='Medium' ? true :false">Medium</option>
+                      <option th:selected="${bug.priority}=='High' ? true :false">High</option>
+                      <option th:selected="${bug.priority}=='Critical' ? true :false">Critical</option>
+                    </select>
+                  </div>
+                  <div class="form-group col">
+                    <label for="status">status</label>
+                    <select class="form-control" id="status" name="status" required>
+                      <option th:selected="${bug.status}=='Open' ? true :false">Open</option>
+                      <option th:selected="${bug.status}=='Test/Ready' ? true :false">Test/Ready</option>
+                      <option th:selected="${bug.status}=='Verified' ? true :false">Verified</option>
+                      <option th:selected="${bug.status}=='Closed' ? true :false">Closed</option>
+                      <option th:selected="${bug.status}=='Rejected' ? true :false">Rejected</option>
+                    </select>
+                  </div>
+                  </div>
+                  <div class="row">
+                      <div class="form-group col">
+                      <label for="id2">Developer</label>
+                        <select class="form-control" id="id2" th:name="iddev" required>
+                          <option value="" disabled selected> ------- </option>
+                          <option th:each="developer : ${developers}"
+                                  th:value="${developer.id}"
+                                  th:selected="${developer.id}==${bug.developerAssigned.id} ? true :false"
+                                  th:text="${developer.firstName+' '+developer.lastName}"></option>
+                        </select>
+                      </div>
+                      <div class="form-group col">
+                      <label for="type">Bug type</label>
+                      <select class="form-control" id="type" name="type" required>
+                        <option th:selected="${bug.type}=='Functional' ? true :false">Functional</option>
+                        <option th:selected="${bug.type}=='Content' ? true :false">Content</option>
+                        <option th:selected="${bug.type}=='Visual' ? true :false">Visual</option>
+                        <option th:selected="${bug.type}=='Security' ? true :false">Security</option>
+                        </select>
+                      </div>
+
+
+                    
+                  </div>
+                  <div class="row">
+                    <div class="form-group col">
+                      <label for="description">Description</label>
+                      <textarea class="form-control" id="description" rows="3" required name="description" th:value="${bug.description}" th:text="${bug.description}"> </textarea>
+                    </div>
+                  </div>
+                 
+
+                  
+                  <input type="Submit" name="Submit" value="Edit" class="btn btn-primary btn-user btn-block">
+                  </form>
+                </div>
+              </div>
+
+
+            </div>      
+
+
+
+
+
+
+          </div>  
+          
+
+          
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <div th:replace="fragments/footer :: footer">&nbsp;</div>
+      <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <div th:replace="fragments/footer :: extrafooter"></div>
+
+
+</body>
+
+</html>
