@@ -7,7 +7,7 @@
 <body>
 <div th:fragment="jschart">
     <!-- Bugs by Priority Bar Chart -->
-    <script type="text/javascript">
+    <script th:inline="javascript">
         // Set new default font family and font color to mimic Bootstrap's default styling
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
@@ -37,6 +37,13 @@
             return s.join(dec);
         }
 
+        var low=/*[[${elements.bugByPriority.get('Low')}]]*/0;
+        var Medium=/*[[${elements.bugByPriority.get('Medium')}]]*/0;
+        var High=/*[[${elements.bugByPriority.get('High')}]]*/0;
+        var Critical=/*[[${elements.bugByPriority.get('Critical')}]]*/0;
+
+
+
         // Bar Chart Example
         var ctx = document.getElementById("myBarChart");
         var myBarChart = new Chart(ctx, {
@@ -48,7 +55,7 @@
                     backgroundColor: "#4e73df",
                     hoverBackgroundColor: "#2e59d9",
                     borderColor: "#4e73df",
-                    data: [13, 12, 4, 8],
+                    data: [low, Medium, High, Critical],
                 }],
             },
             options: {
@@ -122,10 +129,15 @@
     </script>
 
     <!-- Bugs by Type  Pie Chart-->
-    <script type="text/javascript">
+    <script th:inline="javascript">
         // Set new default font family and font color to mimic Bootstrap's default styling
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
+
+        var Functional=/*[[${elements.bugByType.get("Functional")}]]*/0;
+        var Content=/*[[${elements.bugByType.get("Content")}]]*/0;
+        var Visual=/*[[${elements.bugByType.get("Visual")}]]*/0;
+        var Security=/*[[${elements.bugByType.get("Security")}]]*/0;
 
         // Pie Chart Example
         var ctx = document.getElementById("myPieChartType");
@@ -134,7 +146,7 @@
             data: {
                 labels: ["Functional", "Content", "Visual", "Security"],
                 datasets: [{
-                    data: [55, 30, 15, 20],
+                    data: [Functional, Content, Visual, Security],
                     backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
                     hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#d6a21d'],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -162,19 +174,25 @@
     </script>
 
     <!-- Bugs by Type  Pie Chart-->
-    <script type="text/javascript">
+    <script th:inline="javascript">
         // Set new default font family and font color to mimic Bootstrap's default styling
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
         Chart.defaults.global.defaultFontColor = '#858796';
+
+        var Developer=/*[[${elements.userByRole.get("Developer")}]]*/0;
+        var Manager=/*[[${elements.userByRole.get("Manager")}]]*/0;
+        var Tester=/*[[${elements.userByRole.get("Tester")}]]*/0;
+        var Admin=/*[[${elements.userByRole.get("Admin")}]]*/0;
+
 
         // Pie Chart Example
         var ctx = document.getElementById("myPieChartRole");
         var myPieChart = new Chart(ctx, {
             type: 'doughnut',
             data: {
-                labels: ["Functional", "Content", "Visual", "Security"],
+                labels: ["Developer", "Manager", "Tester", "Admin"],
                 datasets: [{
-                    data: [55, 30, 15, 20],
+                    data: [Developer, Manager, Tester, Admin],
                     backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
                     hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#d6a21d'],
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -200,5 +218,6 @@
         });
 
     </script>
+</div>
 </body>
 </html>

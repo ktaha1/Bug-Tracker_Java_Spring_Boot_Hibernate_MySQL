@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -153,5 +154,40 @@ public class MainService {
     }
 
 
+
+    public DashboardElement getDashboardElements(){
+
+        int nbrProjects = projectRepository.findAll().size();
+        int nbrBugs = bugRepository.findAll().size();
+        int nbrUsers = userRepository.findAll().size();
+        int nbrAdmins = userRepository.findAllByRoleEquals("Admin").size();
+        HashMap<String,Integer> bugByPriority = new HashMap<String,Integer>();
+        bugByPriority.put("Low", bugRepository.findAllByPriorityEquals("Low").size());
+        bugByPriority.put("Medium", bugRepository.findAllByPriorityEquals("Medium").size());
+        bugByPriority.put("High", bugRepository.findAllByPriorityEquals("High").size());
+        bugByPriority.put("Critical", bugRepository.findAllByPriorityEquals("Critical").size());
+
+        HashMap<String,Integer> bugByType = new HashMap<String,Integer>();
+        bugByType.put("Functional", bugRepository.findAllByTypeEquals("Functional").size());
+        bugByType.put("Content", bugRepository.findAllByTypeEquals("Content").size());
+        bugByType.put("Visual", bugRepository.findAllByTypeEquals("Visual").size());
+        bugByType.put("Security", bugRepository.findAllByTypeEquals("Security").size());
+
+        HashMap<String,Integer> bugByStatus = new HashMap<String,Integer>();
+        bugByStatus.put("Open", bugRepository.findAllByStatusEquals("Open").size());
+        bugByStatus.put("Test/Ready", bugRepository.findAllByStatusEquals("Test/Ready").size());
+        bugByStatus.put("Verified", bugRepository.findAllByStatusEquals("Verified").size());
+        bugByStatus.put("Closed", bugRepository.findAllByStatusEquals("Closed").size());
+        bugByStatus.put("Rejected", bugRepository.findAllByStatusEquals("Rejected").size());
+
+        HashMap<String,Integer> userByRole = new HashMap<String,Integer>();
+        userByRole.put("Admin", userRepository.findAllByRoleEquals("Admin").size());
+        userByRole.put("Manager", userRepository.findAllByRoleEquals("Manager").size());
+        userByRole.put("Tester", userRepository.findAllByRoleEquals("Tester").size());
+        userByRole.put("Developer", userRepository.findAllByRoleEquals("Developer").size());
+
+        return new DashboardElement(nbrProjects, nbrBugs, nbrUsers, nbrAdmins, bugByPriority, bugByType, bugByStatus, userByRole);
+
+    }
 
 }

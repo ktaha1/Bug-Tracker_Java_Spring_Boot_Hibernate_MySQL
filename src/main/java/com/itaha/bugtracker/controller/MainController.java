@@ -158,9 +158,12 @@ public class MainController {
     @RequestMapping("/dashboard")
     public ModelAndView getDashboard(){
         ModelAndView mv = new ModelAndView();
+        mv.addObject("elements", service.getDashboardElements());
         mv.setViewName("dashboard");
         return mv;
     }
+
+
 
 
 
